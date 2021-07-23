@@ -1,0 +1,7 @@
+## Interface: 90100
+## Title: Tazavesh Password Helper
+## Author: Gerbo-Perenolde
+## Version: 0.1
+## Notes: Directs the user to the correct NPC to reach Myza's Oasis
+
+TazPwdHelper.lua
