@@ -1,13 +1,9 @@
 -- Aeon Williams, Gerbo-Perenolde, 7/21
 
 -- TODO: only do these checks if we're in the right location
--- TODO: only set the target marker if the target has changed
+-- DONE: only set the target marker if the target has changed
 
--- TODO: delete those you fuck
--- client_id:     b0dfeb9c98c94f7db682c439218e26b8
--- client_secret: rfbBlA0EE2M2RDhed29OH6Y27YaKRGYp
-
--- Xy'aro : Overpriced Art
+-- Xy'aro : Overpriced Art *doesn't have a starting item from xy'darid, wonder why
 -- Xy'nara : Exotic Spices
 -- Xy'har Fancy Instruments
 -- Xy'zaro : Fossil Collector
@@ -55,8 +51,9 @@ event_started = false
 --   if name == "Xy'darid" then
 --     for i = 0, NUM_BAG_SLOTS do
 --       for z = 1, GetContainerNumSlots(i) do
---         if xydarid_items[GetContainerItemID(i, z)] == true then
---           SelectNPC(math.random(8))
+--         item_id = GetContainerItemID(i, z)
+--         if xydarid_items[item_id] == true then
+--           SelectNPC(item_id)
 --           event_started = true
 --           return
 --         end
@@ -65,8 +62,8 @@ event_started = false
 --   end
 -- end)
 
-function SelectNPC() -- item_id
-  item_id = 185909
+function SelectNPC(item_id) -- item_id
+  -- item_id = 185909
   target = npc_items[item_id]
   local b = CreateFrame('Button', "Button1", UIParent, "SecureActionButtonTemplate")
   b:SetSize(80,100)
@@ -76,18 +73,17 @@ function SelectNPC() -- item_id
   b:SetAttribute("type", "macro")
   b:SetAttribute("macrotext", "/target "..target)
   b:SetScript("PostClick", function(self)
-    SetRaidTarget("target", 6)
+    if GetRaidTargetIndex("target") ~= 6 then
+      SetRaidTarget("target", 6)
+    end
     self:Hide()
     self:Disable()
   end)
 end
---
-local temp = CreateFrame("Button", "Temp", UIParent)
-temp:SetSize(20,20)
-temp:SetPoint("Center")
-temp:SetNormalTexture("Interface\\Addons\\TazPwdHelper\\Textures\\BLUEGRAD64.PNG")
-temp:Show()
-temp:SetScript("OnClick", SelectNPC)
 
--- on event UNIT_AURA, check for debuff from item
--- target NPC based on specific item clicked
+-- local temp = CreateFrame("Button", "Temp", UIParent)
+-- temp:SetSize(20,20)
+-- temp:SetPoint("Center")
+-- temp:SetNormalTexture("Interface\\Addons\\TazPwdHelper\\Textures\\BLUEGRAD64.PNG")
+-- temp:Show()
+-- temp:SetScript("OnClick", SelectNPC)
