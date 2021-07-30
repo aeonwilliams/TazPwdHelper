@@ -5,5 +5,3 @@
 ## Notes: Directs the user to the correct NPC to reach Myza's Oasis
 
 TazPwdHelper.lua
-libs\LibStub\LibStub.lua
-libs\HereBeDragons\HereBeDragons-2.0.lua
